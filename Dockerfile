@@ -1,20 +1,25 @@
-FROM openjdk:11-jdk as builder
-
-COPY . .
-
-RUN ./gradlew --no-daemon installDist
-
-FROM openjdk:11-jre-slim
+FROM openjdk:11-jdk-slim
 
 ENV APPLICATION_USER kord
 RUN adduser --disabled-login --ingroup '' $APPLICATION_USER
 
 RUN mkdir /app
+
+# Create fatJar
+RUN mkdir /temp
+COPY . /temp
+RUN cd /temp
+WORKDIR /temp
+RUN cat settings.gradle.kts
+RUN ./gradlew --no-daemon fatJar
+
+RUN cp /temp/build/libs/KordDnD.jar /app
+
+# delete temporary files
+RUN rm -R /temp
+
 RUN chown -R $APPLICATION_USER /app
-
 USER $APPLICATION_USER
-
-COPY --from=builder build/libs/KordDnD.jar /app
 
 WORKDIR /app
 
