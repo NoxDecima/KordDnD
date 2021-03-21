@@ -1,3 +1,5 @@
+# KordDnD
+
 KordDnD is a discord that provides various commands to provide DnD related informations to discord servers via discord slash commands.
 
 ## Docker
