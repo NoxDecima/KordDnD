@@ -1,6 +1,6 @@
 # KordDnD
 
-KordDnD is a discord that provides various commands to provide DnD related informations to discord servers via discord slash commands.
+KordDnD is a discord bot that provides various commands to provide DnD related informations to discord servers via discord slash commands.
 
 ## Docker
 You can deploy the bot using docker:
